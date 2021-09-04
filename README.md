@@ -63,7 +63,18 @@ The user should be notified by Dialog/Headless Activity that will be launched at
 
 __________________________________________________________________________________________________________________________________________________________________________________
 
-App Screen:
+App Screens:
+
+
+![Screenshot_1630750611](https://user-images.githubusercontent.com/56019016/132091176-c39b2bca-eeaf-4654-904c-17e444c9c9ef.png)
+![Screenshot_1630750622](https://user-images.githubusercontent.com/56019016/132091185-918077e3-5da8-465c-9e58-1705f5d77f24.png)
+![Screenshot_1630750625](https://user-images.githubusercontent.com/56019016/132091186-284f62d3-fd2a-45d6-a391-db7fddf238bf.png)
+![Screenshot_1630750660](https://user-images.githubusercontent.com/56019016/132091191-f73fa3ed-3bb7-45a6-a93b-74d5e90a6de3.png)
+![Screenshot_1630750674](https://user-images.githubusercontent.com/56019016/132091192-2f61cbc8-46b7-432d-a5c9-375796b06e0f.png)
+![Screenshot_1630750682](https://user-images.githubusercontent.com/56019016/132091195-71440cad-c4f4-4a94-a3dd-92fbdf5ea844.png)
+![Screenshot_1630750724](https://user-images.githubusercontent.com/56019016/132091196-1d9a466b-47fd-4c30-b863-ceff0aaaad47.png)
+![Screenshot_1630750741](https://user-images.githubusercontent.com/56019016/132091197-f3f298d8-ee4e-4037-9376-5ed9e941e07b.png)
+
 
 
 
