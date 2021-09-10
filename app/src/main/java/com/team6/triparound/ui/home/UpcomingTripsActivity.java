@@ -69,8 +69,6 @@ public class UpcomingTripsActivity extends AppCompatActivity   {
             @Override
             public void onClick(View view) {
 
-//                Intent addButtonActivity = new Intent(UpcomingTripsActivity.this, AddBtnActivity.class);
-//                startActivity(addButtonActivity);
                 Intent i = new Intent(UpcomingTripsActivity.this, AddBtnActivity.class);
                 startActivityForResult(i, 55);
             }
@@ -107,17 +105,20 @@ public class UpcomingTripsActivity extends AppCompatActivity   {
 
 
                     drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                    DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
+                    DatabaseReference connectedRef = FirebaseDatabase.getInstance()
+                            .getReference(".info/connected");
                     connectedRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             boolean connected = snapshot.getValue(Boolean.class);
 
                             if (connected) {
-                                Toast.makeText(UpcomingTripsActivity.this, "You are Connected and Data Updated", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UpcomingTripsActivity.this,
+                                        "You are Connected and Data Updated", Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(UpcomingTripsActivity.this, "Please check your connection", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UpcomingTripsActivity.this,
+                                        "Please check your connection", Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override

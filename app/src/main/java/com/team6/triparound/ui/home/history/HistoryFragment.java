@@ -32,6 +32,8 @@ public class HistoryFragment extends Fragment {
     private FirebaseUser currentUser;
     private DatabaseReference mTripsRef;
     private List<TripModel> tripDetails = new ArrayList<>();
+    RecyclerView rev;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -47,15 +49,17 @@ public class HistoryFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.history_fragment, container, false);
 
-        RecyclerView rev = root.findViewById(R.id.recycler);
-       HistoryAdaptor adpater = new HistoryAdaptor(tripDetails, getActivity());
+        rev = root.findViewById(R.id.recycler);
+
+
+        HistoryAdaptor adpater = new HistoryAdaptor(tripDetails, getActivity());
 
        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
        linearLayoutManager.setReverseLayout(true);
        linearLayoutManager.setStackFromEnd(true);
        rev.setLayoutManager(linearLayoutManager);
 
-        //rev.setLayoutManager(new LinearLayoutManager(getContext()));
+
         rev.setAdapter(adpater);
 
         ValueEventListener postListener = new ValueEventListener() {
@@ -81,6 +85,9 @@ public class HistoryFragment extends Fragment {
         mTripsRef.addValueEventListener(postListener);
 
         return root;
+    }
+
+    private void recyclerViewInit() {
     }
 
 

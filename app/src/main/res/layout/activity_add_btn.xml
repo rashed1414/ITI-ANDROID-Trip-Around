@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_Btn_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="16dp"
-    android:id="@+id/activity_add_Btn_layout"
     tools:context=".ui.home.addButtonActivity.AddBtnActivity">
 
     <ProgressBar
@@ -24,40 +24,43 @@
     <Button
         android:id="@+id/add_trip_btn"
         style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btnsignin"
         android:requiresFadingEdge="horizontal|vertical"
         android:text="@string/add_trip"
         android:textColor="@color/white"
         android:textSize="8pt"
         app:icon="@drawable/ic_note_add_24px"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.705"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/cancel_btn"
         style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btnsignin"
         android:requiresFadingEdge="horizontal|vertical"
         android:text="@string/cancel"
         android:textColor="@color/white"
         android:textSize="8pt"
         app:icon="@drawable/ic_note_add_24px"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/add_trip_btn"
-        app:layout_constraintHorizontal_bias="0."
+        app:layout_constraintEnd_toStartOf="@+id/add_trip_btn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.core.widget.NestedScrollView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="74dp">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -198,25 +201,24 @@
                 android:layout_width="234dp"
                 android:layout_height="36dp"
                 android:layout_marginHorizontal="8dp"
-                android:text="@string/start_point"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/auto_start"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.521"
+                app:layout_constraintHorizontal_bias="0.254"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/trip_name_text_field" />
+                app:layout_constraintTop_toBottomOf="@+id/trip_name_text_field"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/dummytv2"
                 android:layout_width="234dp"
                 android:layout_height="37dp"
                 android:layout_marginHorizontal="8dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/destination"
+                android:layout_marginBottom="4dp"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/auto_end"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintHorizontal_bias="0.276"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -238,20 +240,20 @@
 
             <AutoCompleteTextView
                 android:id="@+id/auto_start"
-                android:layout_width="347dp"
-                android:layout_height="56dp"
+                android:layout_width="377dp"
+                android:layout_height="58dp"
                 android:layout_marginBottom="12dp"
-                android:hint="@string/start"
+                android:hint="@string/start_point"
                 app:layout_constraintBottom_toTopOf="@+id/dummytv2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <AutoCompleteTextView
                 android:id="@+id/auto_end"
-                android:layout_width="351dp"
-                android:layout_height="62dp"
-                android:layout_marginBottom="12dp"
-                android:hint="@string/end"
+                android:layout_width="375dp"
+                android:layout_height="61dp"
+                android:layout_marginBottom="16dp"
+                android:hint="@string/destination"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

@@ -49,6 +49,7 @@ import butterknife.OnClick;
 public class AddBtnActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
     public static final String NEW_TRIP_OBJECT = "NEW_TRIP_OBJECT";
     public static final String NEW_TRIP_OBJ_SERIAL = "NEW_TRIP_OBJECT";
+    String trip_Type,trip_Reption;
 
     @BindView(R.id.add_trip_btn)
     Button addTripBtn;
@@ -82,6 +83,7 @@ public class AddBtnActivity extends AppCompatActivity implements TimePickerDialo
     ArrayAdapter<CharSequence> adapterTripRepeatSpin;
     List<TextInputLayout> mNotesTextInputLayout = new ArrayList<>();
     List<String> notesList = new ArrayList<>();
+    List<String> lstNoty;
 
     AlarmManager alarmManager;
     PendingIntent pendingIntent;
@@ -146,20 +148,20 @@ public class AddBtnActivity extends AppCompatActivity implements TimePickerDialo
                 }
                 if (tripNameTextField.getEditText().getText().toString().equals("")) {
                     tripNameTextField.setError("Cannot be blank!");
-                } else if (dateTextField.getText().toString().equals("")) {
-                    dateTextField.setError("Cannot be blank!");
-                } else if (timeTextField.getText().toString().equals("")) {
-                    timeTextField.setError("Cannot be blank!");
                 }else if (start.getText().toString().equals("")) {
                     start.setError("Cannot be blank!");
                 }else if (end.getText().toString().equals("")) {
                     end.setError("Cannot be blank!");
-                } else {
+                }  else if (dateTextField.getText().toString().equals("")) {
+                    dateTextField.setError("Cannot be blank!");
+                } else if (timeTextField.getText().toString().equals("")) {
+                    timeTextField.setError("Cannot be blank!");
+                }else {
                     TripModel newTrip = new TripModel(start.getText().toString(), end.getText().toString(),
                             dateTextField.getText().toString(),
                             timeTextField.getText().toString(),
                             tripNameTextField.getEditText().getText().toString(),
-                            null, notesList, mCalendar.getTime().toString());
+                            null, notesList, mCalendar.getTime().toString(),trip_Type,trip_Reption);
 
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("NEWTRIP", newTrip);
@@ -188,6 +190,8 @@ public class AddBtnActivity extends AppCompatActivity implements TimePickerDialo
         }
     }
 
+
+
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         Calendar c = Calendar.getInstance();
         c.set(Calendar.YEAR, i);
@@ -197,7 +201,7 @@ public class AddBtnActivity extends AppCompatActivity implements TimePickerDialo
         Log.i("Date Time Picker", currentDateString);
         dateTextField.setText(currentDateString);
         mCalendar.set(Calendar.YEAR, i);
-        mCalendar.set(Calendar.MONTH, i1); // Month is zero-based
+        mCalendar.set(Calendar.MONTH, i1);
         mCalendar.set(Calendar.DAY_OF_MONTH, i2);
 
     }
@@ -252,7 +256,8 @@ public class AddBtnActivity extends AppCompatActivity implements TimePickerDialo
         tripWaySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-                Log.i("Spinner", adapterView.getItemAtPosition(pos).toString() + "");
+               // Still in Progress
+                trip_Type=tripWaySpinner.getSelectedItem().toString();
             }
 
             @Override
@@ -271,7 +276,8 @@ public class AddBtnActivity extends AppCompatActivity implements TimePickerDialo
         repeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-                Log.i("Spinner", adapterView.getItemAtPosition(pos).toString() + "");
+                //Still in progress
+                trip_Reption=repeatSpinner.getSelectedItem().toString();
             }
 
             @Override
@@ -303,8 +309,7 @@ public class AddBtnActivity extends AppCompatActivity implements TimePickerDialo
     private void startAlarm(TripModel tripModel) {
 
         alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-//        Log.i("time", mCalendar.getTime().toString());
-//        long alarmTime = mCalendar.getTimeInMillis();
+
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         try {
@@ -325,10 +330,7 @@ public class AddBtnActivity extends AppCompatActivity implements TimePickerDialo
     }
 
 
-    private void cancelAlarm() {
-        alarmManager.cancel(pendingIntent);
-        Toast.makeText(getApplicationContext(), "Alarm Cancelled", Toast.LENGTH_LONG).show();
-    }
+
 
 
     private void hideProgressBar(){

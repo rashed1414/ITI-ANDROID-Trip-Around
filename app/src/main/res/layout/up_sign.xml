@@ -86,24 +86,30 @@
         app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
     <Button
+
         android:id="@+id/btnSignUp"
-        android:layout_width="122dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="56dp"
-        android:background="#3F51B5"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/btnsignin"
+
         android:text="@string/sign_up"
         android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passField2" />
+        app:layout_constraintTop_toBottomOf="@+id/passField2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btnBack"
+        android:background="@drawable/btnsignin"
         android:layout_width="70dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="#3F51B5"
+
         android:text="Back"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"

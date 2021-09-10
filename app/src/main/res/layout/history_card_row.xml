@@ -26,7 +26,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
+                android:weightSum="4"
                 android:layout_marginHorizontal="12dp"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
@@ -41,12 +41,18 @@
                     android:text="TextView" />
 
                 <TextView
+                    android:id="@+id/R"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
                     android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:text="TextView" />
+                    />
 
                 <Button
                     android:id="@+id/pop_menu_id"
@@ -188,12 +194,42 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="61dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                android:weightSum="8">
 
+                <TextView
+                    android:id="@+id/Trip_type"
+                    android:layout_width="180dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:maxLines="2"
+
+                    android:text="TextView"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/Trip_repition"
+                    android:layout_width="180dp"
+                    android:layout_height="44dp"
+                    android:layout_gravity="center"
+                    android:maxLines="2"
+
+                    android:text="TextView"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
 
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+
 
 
 </LinearLayout>

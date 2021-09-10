@@ -25,7 +25,6 @@ public class FirebaseDB {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        //myRef = database.getReference(currentUser.getUid());
         myRef = database.getReference();
 
 
@@ -67,13 +66,11 @@ public class FirebaseDB {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
                     appleSnapshot.getRef().removeValue();
-                    Log.i("DELETE_FROM_DB","DELETE_FROM_DB");
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("FBDB", "onCancelled", databaseError.toException());
             }
         });
     }
@@ -91,13 +88,11 @@ public class FirebaseDB {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
                     appleSnapshot.getRef().removeValue();
-                    Log.i("DELETE_FROM_DB","DELETE_FROM_DB");
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.e("FBDB", "onCancelled", databaseError.toException());
             }
         });
 

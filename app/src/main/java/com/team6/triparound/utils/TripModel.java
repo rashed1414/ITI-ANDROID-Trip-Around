@@ -6,7 +6,7 @@ import java.util.List;
 public class TripModel implements Serializable {
 
 
-    public String startloc,endloc,date,time,status,tripname,dateTime;
+    public String startloc,endloc,date,time,status,tripname,dateTime,tripType,tripRepition;
     private List<String> notes = new ArrayList<>();
 
     public String  getDateTime() {
@@ -36,6 +36,21 @@ public class TripModel implements Serializable {
         this.status = status;
         this.notes = notes;
         this.dateTime = dateTime;
+    }
+    public TripModel(String startloc, String endloc, String date, String time,
+                     String tripname, String status, List<String> notes,String dateTime,String tripType,
+                     String tripRepition) {
+        this.startloc = startloc;
+        this.endloc = endloc;
+        this.date = date;
+        this.time = time;
+        this.status = status;
+        this.tripname = tripname;
+        this.status = status;
+        this.notes = notes;
+        this.dateTime = dateTime;
+        this.tripType=tripType;
+        this.tripRepition=tripRepition;
     }
     public TripModel(String startloc, String endloc, String date, String time,
                      String tripname, String status, List<String> notes) {

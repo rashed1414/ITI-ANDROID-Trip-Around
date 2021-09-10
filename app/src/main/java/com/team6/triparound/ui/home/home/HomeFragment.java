@@ -50,7 +50,6 @@ public class HomeFragment extends Fragment {
         linearLayoutManager.setReverseLayout(true);
         linearLayoutManager.setStackFromEnd(true);
         rev.setLayoutManager(linearLayoutManager);
-        //rev.setLayoutManager(new LinearLayoutManager(getContext()));
         rev.setAdapter(adpater);
 
         ValueEventListener postListener = new ValueEventListener() {

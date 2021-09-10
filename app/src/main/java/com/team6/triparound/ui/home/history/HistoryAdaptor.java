@@ -1,6 +1,9 @@
 package com.team6.triparound.ui.home.history;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,21 +15,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.team6.triparound.R;
 import com.team6.triparound.data.remote.network.FirebaseDB;
+import com.team6.triparound.service.FloatingWindowService;
 import com.team6.triparound.utils.TripModel;
+import com.team6.triparound.utils.alarmManagerReciever.MyDialogActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.ViewHolder> {
 
+
+
     List<TripModel> list = new ArrayList<>();
     Context cntxt;
     FirebaseDB mFirebaseDB;
+    AlertDialog alertDialog;
 
 
     public HistoryAdaptor(List<TripModel> list, Context cntxt) {
@@ -49,9 +58,11 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.ViewHold
         holder.start.setText(list.get(position).startloc);
         holder.name.setText(list.get(position).tripname);
         holder.date.setText(list.get(position).date);
+        holder.trip_Type.setText(list.get(position).tripType);
+        holder.trip_Reptition.setText(list.get(position).tripRepition);
         Log.i("STATUS_COLOR",holder.status.getText().toString());
         if(list.get(position).status.equals("Done!")){
-          holder.status.setTextColor(cntxt.getResources().getColor(R.color.green));
+            holder.status.setTextColor(cntxt.getResources().getColor(R.color.green));
         }
         else{
             holder.status.setTextColor(cntxt.getResources().getColor(R.color.red));
@@ -69,13 +80,36 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.ViewHold
                     public boolean onMenuItemClick(MenuItem item) {
                         //handle item selection from the card pop menu
 
-                        if (item.getItemId() == R.id.delete) {
 
-                            Toast.makeText(cntxt, "Trip Deleted!", Toast.LENGTH_LONG).show();
-                            mFirebaseDB.removeTripFromHistory(list.get(position));
-                            notifyDataSetChanged();
+                        if (item.getItemId() == R.id.delete) {
+                            androidx.appcompat.app.AlertDialog.Builder Builder = new androidx.appcompat.app.AlertDialog.Builder(cntxt)
+                                    .setMessage("Are you Sure you want to delete?")
+                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(cntxt, "Trip Deleted!", Toast.LENGTH_LONG).show();
+                                            mFirebaseDB.removeTripFromHistory(list.get(position));
+                                            notifyDataSetChanged();
+
+
+
+
+                                        }
+                                    }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            Toast.makeText(cntxt, "Deletion Cancel", Toast.LENGTH_LONG).show();
+                                            notifyDataSetChanged();
+                                            alertDialog.dismiss();
+
+
+                                        }
+                                    });
+                            alertDialog = Builder.create();
+                            alertDialog.show();
+
                         }
-                        if(item.getItemId() == R.id.viewnotes){
+                        else if(item.getItemId() == R.id.viewnotes){
 
 
                             PopupMenu pop = new PopupMenu(cntxt, v);
@@ -86,6 +120,8 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.ViewHold
                             }
                             pop.show();
                         }
+
+
 
                         return false;
                     }
@@ -104,8 +140,7 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         Button popup;
-        CardView cardview;
-        TextView start, end, date, time, name, status;
+        TextView start, end, date, time, name, status,trip_Type,trip_Reptition;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -119,6 +154,8 @@ public class HistoryAdaptor extends RecyclerView.Adapter<HistoryAdaptor.ViewHold
             date = itemView.findViewById(R.id.Date_id);
             status = itemView.findViewById(R.id.status);
             popup = itemView.findViewById(R.id.pop_menu_id);
+            trip_Type=itemView.findViewById(R.id.Trip_type);
+            trip_Reptition=itemView.findViewById(R.id.Trip_repition);
 
         }
     }

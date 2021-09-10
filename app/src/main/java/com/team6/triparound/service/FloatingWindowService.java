@@ -2,6 +2,7 @@ package com.team6.triparound.service;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -17,11 +18,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.team6.triparound.R;
 import com.team6.triparound.ui.home.UpcomingTripsActivity;
+import com.team6.triparound.ui.home.addButtonActivity.AddBtnActivity;
+import com.team6.triparound.ui.home.home.HomeAdaptor;
 import com.team6.triparound.utils.TripModel;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -33,11 +38,11 @@ import java.util.List;
 public class FloatingWindowService extends Service {
     private final IBinder localBinder = new MyBinder();
 
-    List<TripModel> list = new ArrayList<>();
     TripModel mTripModel;
     WindowManager wm;
     LinearLayout ll;
     private boolean listOn = false;
+
 
     @Nullable
     @Override
@@ -48,10 +53,11 @@ public class FloatingWindowService extends Service {
     }
 
 
-    @SuppressLint("ClickableViewAccessibility")
+        @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onCreate() {
         super.onCreate();
+
         wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         ll = new LinearLayout(this);
         ll.setBackgroundColor(Color.TRANSPARENT);
@@ -115,33 +121,33 @@ public class FloatingWindowService extends Service {
 
             }
         });
-        openapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListView listview = new ListView(FloatingWindowService.this);
 
-                String[] aarray = {"vdf"};
-               ArrayAdapter<String> adapter = new ArrayAdapter<String>(FloatingWindowService.this
-                       , android.R.layout.simple_list_item_1, aarray);
-               listview.setAdapter(adapter);
+        openapp.setOnClickListener(view -> {
+            ListView listview = new ListView(FloatingWindowService.this);
+            ArrayList<String>notey= (ArrayList<String>) mTripModel.getNotes();
+            ArrayList<String> arr = new ArrayList<>();
+            arr.add("test");
 
-                if (!listOn) {
-                    ll.addView(listview);
-                } else {
-                    ll.removeView(listview);
-                }
+            arr.toArray();
 
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(FloatingWindowService.this
+                   , android.R.layout.simple_list_item_1, arr);
+           listview.setAdapter(adapter);
+
+            if (!listOn) {
+                ll.addView(listview);
+            } else {
+                ll.removeView(listview);
             }
+
         });
-        openapp.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                Intent i = new Intent(FloatingWindowService.this, UpcomingTripsActivity.class);
-                i.setFlags(FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
-                wm.removeView(ll);
-                return false;
-            }
+        openapp.setOnLongClickListener(view -> {
+            Intent i = new Intent(FloatingWindowService.this, UpcomingTripsActivity.class);
+            i.setFlags(FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            wm.removeView(ll);
+            return false;
         });
     }
 

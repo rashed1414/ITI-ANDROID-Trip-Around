@@ -46,9 +46,7 @@ public class Login extends Fragment {
     Button btnSignUp;
     Button btnSignIn;
     public SignInButton btnGoogle;
-
     TextView mStatusTextView;
-
     ProgressBar mProgressBar;
     private static final int RC_SIGN_IN = 9001;
 
@@ -121,7 +119,6 @@ public class Login extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-//                        updateUI(null);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

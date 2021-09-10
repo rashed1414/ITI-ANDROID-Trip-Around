@@ -30,7 +30,6 @@ import static com.team6.triparound.utils.alarmManagerReciever.AlarmEventReciever
 import static com.team6.triparound.utils.alarmManagerReciever.AlarmEventReciever.RECEIVED_TRIP_SEND_SERIAL;
 
 public class MyDialogActivity extends Activity {
-   // public static final String DIALOG_TO_BUBBLE = "DIALOG_TO_BUBBLE";
     DialognotificationService mService;
     AlertDialog alertDialog;
     android.app.AlertDialog alert;
@@ -53,7 +52,7 @@ public class MyDialogActivity extends Activity {
         if (tm != null) {
             startAlarmRingTone(r);
             AlertDialog.Builder Builder = new AlertDialog.Builder(this)
-                    .setMessage("Your Trip: \" "+ tm.getTripname() +"\" is now on...")
+                    .setMessage("Your Trip: \" "+ tm.getTripname()+"\" is now on...")
                     .setTitle("Trip reminder")
                     .setIcon(android.R.drawable.ic_lock_idle_alarm)
                     .setNegativeButton("Snooze", new DialogInterface.OnClickListener() {
@@ -75,8 +74,9 @@ public class MyDialogActivity extends Activity {
                             tm.setStatus("Done!");
                             firebaseDB.addTripToHistory(tm);
                             firebaseDB.removeFromUpcoming(tm);
-                            Uri gmmIntentUri = Uri.parse("http://maps.google.com/maps?saddr="
-                                    + tm.getStartloc()+"&daddr="+tm.getEndloc());
+                            Uri gmmIntentUri =Uri.parse("google.navigation:q="+tm.getEndloc());
+                                    /*Uri.parse("http://maps.google.com/maps?saddr="
+                                    + tm.getStartloc()+"&daddr="+tm.getEndloc());*/
                             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                             mapIntent.setPackage("com.google.android.apps.maps");
                             stopAlarmRingTone(r);
@@ -116,7 +116,6 @@ public class MyDialogActivity extends Activity {
 
     public void startDialogService(TripModel tm) {
         Intent service = new Intent(this, DialognotificationService.class);
-
         service.putExtra(RECEIVED_TRIP_SEND_SERIAL, tm);
         service.putExtra("test","MEMO");
         startService(service);
@@ -149,14 +148,10 @@ public class MyDialogActivity extends Activity {
         if (checkPermission()) {
             if (started) {
                 Intent i = new Intent(MyDialogActivity.this, FloatingWindowService.class);
-
-
                 stopService(i);
-                // start_stop.setText("Start");
                 started = false;
             } else {
                 Intent i = new Intent(MyDialogActivity.this, FloatingWindowService.class);
-
                 startService(i);
                 started = true;
             }
